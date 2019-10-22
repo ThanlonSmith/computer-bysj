@@ -5,3 +5,10 @@
 # @Email   : thanlon@sina.com
 # @File    : user.py
 # @Software: PyCharm
+from .. import home_bp
+from flask import render_template
+
+
+@home_bp.route('/login')
+def login():
+    return render_template('home/layout.html')
