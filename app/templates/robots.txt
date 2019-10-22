@@ -1,0 +1,8 @@
+User-agent: *<br>
+Disallow: /index.html<br>
+Disallow: /login/<br>
+Disallow: /*/feed<br>
+Disallow: /trackback/<br>
+Disallow: /*?replytocom=*<br>
+Disallow: /*/comment-page*<br>
+Sitemap: https://www.bysj39.com/sitemap.xml
