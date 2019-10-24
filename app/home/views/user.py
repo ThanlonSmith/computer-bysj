@@ -11,4 +11,4 @@ from flask import render_template
 
 # @home_bp.route('/login')
 # def login():
-#     return render_template('home/layout.html')
+#     return render_template('home/layout.html.bak')
