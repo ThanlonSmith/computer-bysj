@@ -22,7 +22,7 @@
     <div class="row">
         <nav class="navbar navbar-default navbar-fixed-top"
              style="background:#fff;box-shadow: 0 2px 8px 0 rgba(50, 50, 50, 0.50);">
-            <div class="container">
+            <div class="container" style="padding:0;">
                 <!--小屏幕导航按钮和logo-->
                 <div class="navbar-header" style="padding-top: 6px">
                     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"
@@ -32,7 +32,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a href="" class="navbar-brand"
-                       style="width:130px;color: #333;height: 60px;padding-top: 18px">
+                       style="width:130px;color: #333;height: 60px;padding-top: 18px;">
                         <span class="glyphicon glyphicon-flag" style="color:#3379b7 "></span>39毕设网
                     </a>
                 </div>
@@ -41,7 +41,7 @@
                 <div class="navbar-collapse collapse" style="padding-top: 10px">
                     <ul class="nav navbar-nav navbar-left">
                         <li>
-                            <a class="curlink" href="" style="font-weight: bold"><span
+                            <a class="curlink" href="{{url_for('home.index')}}" style="font-weight: bold"><span
                                     class=""></span>&nbsp;首页</a>
                         </li>
                         <li>
@@ -71,7 +71,7 @@
                                     class=""></span>&nbsp;建站咨询</a>
                         </li>
                         <li>
-                            <a class="curlink" href=""
+                            <a class="curlink" href="{{url_for('home.feedback')}}"
                                style="font-weight: bold;"><span
                                     class=""></span>&nbsp;用户反馈</a>
                         </li>
@@ -199,18 +199,8 @@
 {% block content %}
 {% endblock %}
 <!--底部-->
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <div class="container-fluid"
-     style="background:#030d28;color: #c1c1c1;font-weight: bold;margin-top: 200px;margin-bottom: 2px">
+     style="background:#030d28;color: #c1c1c1;font-weight: bold;margin-top: 75px;margin-bottom: 2px">
     <div class="row">
         <div class="col-md-12  text-center" style="padding: 40px">
             <a href="" style="color:#c1c1c1;font-weight: bold">关于本站</a>&nbsp;|&nbsp;<a
@@ -220,7 +210,7 @@
             <br>
             Copyright © 2019-2020&nbsp; 39bysj. All Rights Reserved.&nbsp;39毕设网 版权所有&nbsp;
             <br>
-            <a target="_blank_" href="http://www.miit.gov.cn/" style="color:#c1c1c1;">豫ICP备19014367号-1</a>
+            <a target="_blank_" href="http://www.miit.gov.cn/" style="color:#c1c1c1;">豫ICP备19037971号</a>
             <a target="_blank">
                 <img src="{{url_for('static',filename='home/images/beian.png')}}" style="padding-bottom:6px"/>
                 <span style="color:#c1c1c1;">豫公网安备 41152802000091号</span>

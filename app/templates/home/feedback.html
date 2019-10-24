@@ -1,0 +1,109 @@
+{% extends 'home/layout.html' %}
+{% block css %}
+
+{% endblock %}
+{% block content %}
+<div class="container" style="margin-top: 70px;padding: 0">
+    <div class="row">
+        <!--        <div class="col-md-3" style="padding: 0;padding-right: 5px">-->
+        <!--            <div class="panel ">-->
+        <!--                <div class="panel-heading">关于本站</div>-->
+        <!--                <div class="panel-body">-->
+        <!--                    <ul class="list-group">-->
+        <!--                        <a href="" class="list-group-item btn "-->
+        <!--                           style="font-weight: bold;">-->
+        <!--                            &nbsp;&nbsp;用户协议-->
+        <!--                        </a>-->
+        <!--                        <a href="" class="list-group-item btn"-->
+        <!--                           style="font-weight: bold;">-->
+        <!--                            &nbsp;&nbsp;免责申明-->
+        <!--                        </a>-->
+        <!--                        <a href="" class="list-group-item btn"-->
+        <!--                           style="font-weight: bold;">-->
+        <!--                            &nbsp;&nbsp;本站蓝图-->
+        <!--                        </a>-->
+        <!--                        <a href="" class="list-group-item btn"-->
+        <!--                           style="font-weight: bold;">-->
+        <!--                            &nbsp;&nbsp;联系运营-->
+        <!--                        </a>-->
+        <!--                        <a href="" class="list-group-item btn"-->
+        <!--                           style="font-weight: bold;background: #ddd">-->
+        <!--                            &nbsp;&nbsp;留言板-->
+        <!--                        </a>-->
+        <!--                    </ul>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <div class="col-md-12" style="padding:5px;">
+            <ol class="breadcrumb" style="margin-bottom: 0;padding: 5px">
+                <li><a href="{{url_for('home.index')}}">首页</a></li>
+                <li class="active">用户反馈</a></li>
+            </ol>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h5>
+                        <span class="glyphicon glyphicon-folder-close"></span>
+                        留言反馈
+                        <hr>
+                        <div>
+                            <p>欢迎来到39毕设网，如果有什么问题，可直接在下面留言区留言反馈!</p>
+                            <br>
+                            <p>如果您在使用本站的过程中遇到问题，可加QQ群进行交流!</p>
+                            <br>
+                            <p>如果有广告、投稿等合作意向，可加@小奈微信：18512152005(加好友请说明来意)!</p>
+                        </div>
+                    </h5>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {% for msg in get_flashed_messages(category_filter=["okey"]) %}
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            ×
+                        </button>
+                        {{ msg }}
+                    </div>
+                    {% endfor %}
+                    {% for msg in get_flashed_messages(category_filter=["error"]) %}
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4><i class="icon fa fa-ban"></i> 操作失败</h4>
+                        {{ msg }}
+                    </div>
+                    {% endfor %}
+                    <form role="form" style="margin-bottom:6px;" method="post">
+                        <div class="form-group">
+                            <div>
+                                <label for="input_content"></label><br>
+
+                            </div>
+
+
+                        </div>
+                        <div class="form-group">
+
+                        </div>
+                    </form>
+                    <div class="breadcrumb">
+                        <li>全部评论</li>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 3px;padding: 0">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">楼&nbsp;留言于</div>
+                            <div class="panel-body"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+{% endblock %}
