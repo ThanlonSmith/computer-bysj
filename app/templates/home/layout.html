@@ -11,44 +11,54 @@
     <link rel="icon" href="" type="image/x-icon">
     <link rel="shortcut icon" href="" type="image/x-icon">
     <link rel="stylesheet" href="{{url_for('static',filename='public/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='public/css/animate.css')}}">
+    <style>
+    </style>
     {% block css %}{% endblock %}
 </head>
-<body style="background-color: #f3f4f7">
+<body>
 <!--导航-->
 <div class="container">
     <div class="row">
         <nav class="navbar navbar-default navbar-fixed-top"
-             style="background:#fff;box-shadow: 0px 2px 8px 0px rgba(50, 50, 50, 0.50);">
+             style="background:#fff;box-shadow: 0 2px 8px 0 rgba(50, 50, 50, 0.50);">
             <div class="container">
                 <!--小屏幕导航按钮和logo-->
-                <div class="navbar-header" style="padding-top: 5px">
-                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <div class="navbar-header" style="padding-top: 6px">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"
+                            style="margin-top: 10px">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
                     <a href="" class="navbar-brand"
-                       style="width:130px;color: #333;height: 60px;padding-top: 15px">
+                       style="width:130px;color: #333;height: 60px;padding-top: 18px">
                         <span class="glyphicon glyphicon-flag" style="color:#3379b7 "></span>39毕设网
                     </a>
                 </div>
                 <!--小屏幕导航按钮和logo-->
                 <!--导航-->
-                <div class="navbar-collapse collapse" style="padding-top: 6px">
+                <div class="navbar-collapse collapse" style="padding-top: 10px">
                     <ul class="nav navbar-nav navbar-left">
                         <li>
                             <a class="curlink" href="" style="font-weight: bold"><span
                                     class=""></span>&nbsp;首页</a>
                         </li>
                         <li>
-                            <a class="curlink" href="" style="font-weight: bold"><span
+                            <a href="" style="font-weight: bold"><span
                                     class=""></span>&nbsp;资讯</a>
                         </li>
-                        <li>
-                            <a id="highlight" class="curlink" href=""
-                               style="font-weight: bold;"><span
-                                    class=""></span>&nbsp;教程<span
-                                    class="glyphicon glyphicon-menu-down"></span></a>
+                        <li class="dropdown" style="margin-left: 3px;">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold">
+                                教程<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Python教程</a></li>
+                                <li><a href="#">Flask教程</a></li>
+                                <li><a href="#">Django教程</a></li>
+                                <li><a href="#">Java教程</a></li>
+                                <li><a href="#">C++教程</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a class="curlink" href=""
@@ -58,18 +68,24 @@
                         <li>
                             <a class="curlink" href=""
                                style="font-weight: bold;"><span
-                                    class=""></span>&nbsp;服务</a>
+                                    class=""></span>&nbsp;建站咨询</a>
                         </li>
+                        <li>
+                            <a class="curlink" href=""
+                               style="font-weight: bold;"><span
+                                    class=""></span>&nbsp;用户反馈</a>
+                        </li>
+
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if "user" not in session %}
                         <li>
-                            <a class="curlink" href="" style="font-weight: bold;padding-right: 0px"><span
-                                    class=""></span>&nbsp;登录</a>
+                            <a data-toggle="modal" data-target="#loginModal" href=""
+                               style="font-weight: bold;">&nbsp;登录</a>
                         </li>
                         <li>
-                            <a class="curlink" href="" style="font-weight: bold;padding-right: 0px"><span
-                                    class=""></span>&nbsp;注册</a>
+                            <a data-toggle="modal" data-target="#registerModal" href=""
+                               style="font-weight: bold;">&nbsp;注册</a>
                         </li>
                         {% endif %}
                         {% if "user" in session %}
@@ -94,10 +110,105 @@
         </nav>
     </div>
 </div>
+<!-- Modal -->
+
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                  class="glyphicon glyphicon-remove-sign"></span>
+                </button>
+                <h3 class="panel-title"><span class="glyphicon glyphicon-plus"></span>&nbsp;注册</h3>
+            </div>
+            <div class="panel-body">
+                <form method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for=""><span
+                                    class="glyphicon glyphicon-user"></span>&nbsp;用户名</label>
+                            <input type="text" class="form-control" id="" placeholder=""
+                                   maxlength="4" minlength="4" autofocus="autofocus">
+                        </div>
+
+                        <div class="form-group">
+                            <label for=""><span
+                                    class="glyphicon glyphicon-lock"></span>密码</label>
+                            <input type="text" class="form-control" placeholder=""
+                                   maxlength="4" minlength="4">
+
+                        </div>
+                        <div class="form-group">
+                            <label for=""><span
+                                    class="glyphicon glyphicon-lock"></span>确认密码</label>
+                            <input type="text" class="form-control" placeholder=""
+                                   maxlength="4" minlength="4">
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                已有账号，请直接<a href="">登录</a>!&nbsp;注册前请您详细阅读本站《<a href="/aboutUs/">用户协议</a>》,如注册,则默认您同意本协议!
+                            </div>
+                            <input type="submit" class="btn btn-log btn-primary btn-block" value="注册">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                  class="glyphicon glyphicon-remove-sign"></span>
+                </button>
+                <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;登录</h3>
+            </div>
+            <div class="panel-body">
+                <form method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for=""><span
+                                    class="glyphicon glyphicon-user"></span>&nbsp;用户名</label>
+                            <input type="text" class="form-control" id="" placeholder=""
+                                   maxlength="4" minlength="4" autofocus="autofocus">
+                        </div>
+
+                        <div class="form-group">
+                            <label for=""><span
+                                    class="glyphicon glyphicon-lock"></span>密码</label>
+                            <input type="text" class="form-control" placeholder=""
+                                   maxlength="4" minlength="4">
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                没有账号，请先<a href="">注册</a>！
+                            </div>
+                            <input type="submit" class="btn btn-log btn-primary btn-block" value="登录">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!--导航-->
 {% block content %}
 {% endblock %}
 <!--底部-->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <div class="container-fluid"
      style="background:#030d28;color: #c1c1c1;font-weight: bold;margin-top: 200px;margin-bottom: 2px">
     <div class="row">
@@ -107,7 +218,7 @@
                 href="" style="color:#c1c1c1;font-weight: bold">本站蓝图</a>&nbsp;|&nbsp;<a
                 href="" style="color:#c1c1c1;font-weight: bold">联系我们</a>
             <br>
-            Copyright © 2019-2019&nbsp; 39bysj. All Rights Reserved.&nbsp;39毕设网 版权所有&nbsp;
+            Copyright © 2019-2020&nbsp; 39bysj. All Rights Reserved.&nbsp;39毕设网 版权所有&nbsp;
             <br>
             <a target="_blank_" href="http://www.miit.gov.cn/" style="color:#c1c1c1;">豫ICP备19014367号-1</a>
             <a target="_blank">
@@ -126,6 +237,13 @@
 </body>
 <script src="{{url_for('static',filename='public/js/jquery.js')}}"></script>
 <script src="{{url_for('static',filename='public/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static',filename='public/js/wow.min.js')}}"></script>
+<script>
+    $(document).ready(function () {
+        new WOW().init();
+        $('body').css('background-color', '#f3f4f7');
+    })
+</script>
 {% block js %}
 {% endblock %}
 </html>
