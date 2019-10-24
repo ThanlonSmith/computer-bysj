@@ -48,17 +48,22 @@
                             <a href="" style="font-weight: bold"><span
                                     class=""></span>&nbsp;资讯</a>
                         </li>
-                        <li class="dropdown" style="margin-left: 3px;">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold">
-                                教程<span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Python教程</a></li>
-                                <li><a href="#">Flask教程</a></li>
-                                <li><a href="#">Django教程</a></li>
-                                <li><a href="#">Java教程</a></li>
-                                <li><a href="#">C++教程</a></li>
-                            </ul>
+                        <!--                        <li class="dropdown" style="margin-left: 3px;">-->
+                        <!--                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold">-->
+                        <!--                                教程<span class="caret"></span>-->
+                        <!--                            </a>-->
+                        <!--                            <ul class="dropdown-menu" role="menu">-->
+                        <!--                                <li><a href="#">Python教程</a></li>-->
+                        <!--                                <li><a href="#">Flask教程</a></li>-->
+                        <!--                                <li><a href="#">Django教程</a></li>-->
+                        <!--                                <li><a href="#">Java教程</a></li>-->
+                        <!--                                <li><a href="#">C++教程</a></li>-->
+                        <!--                            </ul>-->
+                        <!--                        </li>-->
+                        <li>
+                            <a class="curlink" href="{{url_for('home.index')}}"
+                               style="font-weight: bold;"><span
+                                    class=""></span>&nbsp;教程</a>
                         </li>
                         <li>
                             <a class="curlink" href="{{url_for('home.mall')}}"
@@ -198,9 +203,19 @@
 <!--导航-->
 {% block content %}
 {% endblock %}
+<div class="container-fluid" style="background-color: rgb(95, 99, 188);color: white;margin-top: 8px">
+    <div class="row">
+        <div class="col-md-12  text-center" style="padding: 70px">
+            <h4><span style="color: red;font-weight: bold">免费</span>提供计算机毕设相关源代码，<span
+                    style="color: red;font-weight: bold">免费</span>指导毕业生做毕设，如 <span
+                    style="color: red;font-weight: bold">需要</span> 可提供 "专人一对一辅助完成毕设" 等个性化服务！</h4>
+            <h4 style="margin-top: 30px;">联系电话：185-1215-2005（上海市静安区）</h4>
+        </div>
+    </div>
+</div>
 <!--底部-->
 <div class="container-fluid"
-     style="background:#030d28;color: #c1c1c1;font-weight: bold;margin-top: 75px;margin-bottom: 2px">
+     style="background:#030d28;color: #c1c1c1;font-weight: bold;margin-bottom: 2px">
     <div class="row">
         <div class="col-md-12  text-center" style="padding: 40px">
             <a href="" style="color:#c1c1c1;font-weight: bold">关于本站</a>&nbsp;|&nbsp;<a
