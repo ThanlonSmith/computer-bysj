@@ -238,12 +238,36 @@
         </div>
     </div>
 </div>
+<div style="width: 70px;height: auto;z-index: 99;bottom: 30%;position: fixed;right: 1px">
+    <div style="position: relative;float: right">
+        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2237653116&site=qq&menu=yes" id="qq"
+           style="display: block;width: 40px;height: 40px;background-color:#0e91e8;margin-top: 1px">
+            <img width="22" height="20" src="{{url_for('static',filename='home/images/QQ.png')}}"
+                 style="margin-top: 10px;margin-left: 9px" alt="点击这里给我发消息" title="点击这里给我发消息">
+        </a>
+        <a href="" id="wechat" style="display: block;width: 40px;height: 40px;background-color:#01b901;margin-top:1px">
+            <img width="22" height="20" src="{{url_for('static',filename='home/images/Wechat.png')}}" alt=""
+                 style="margin-top: 10px;margin-left: 9px">
+        </a>
+        <a href="" id="weibo"
+           style="display: block;width: 40px;height: 40px;background-color: #ff6b3f;;margin-top: 1px">
+            <img width="22" height="20" src="{{url_for('static',filename='home/images/weibo.png')}}" alt=""
+                 style="margin-top: 10px;margin-left: 9px">
+        </a>
+
+        <a href="" id="top" style="display: none;width: 40px;height: 40px;background-color: #b5b5b5;margin-top: 1px">
+            <img width="22" height="20" src="{{url_for('static',filename='home/images/top.png')}}" alt=""
+                 style="margin-top: 10px;margin-left: 9px">
+        </a>
+    </div>
+</div>
 <!--底部-->
 </body>
 <script src="{{url_for('static',filename='public/js/jquery.js')}}"></script>
 <script src="{{url_for('static',filename='public/bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{url_for('static',filename='public/js/wow.min.js')}}"></script>
 <script src="https://cdn.bootcss.com/holder/2.9.6/holder.min.js"></script>
+<script src="{{url_for('static',filename='home/js/top.js')}}"></script>
 <script>
     $(document).ready(function () {
         new WOW().init();
