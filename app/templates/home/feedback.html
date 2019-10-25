@@ -34,11 +34,16 @@
         <!--                </div>-->
         <!--            </div>-->
         <!--        </div>-->
+        <div class="col-md-12" style="padding: 0;margin-top: 8px">
+            <img src="holder.js/1200x100" class="img-responsive" alt="">
+        </div>
         <div class="col-md-12" style="padding:5px;">
+
             <ol class="breadcrumb" style="margin-bottom: 0;padding: 10px">
                 <li><a href="{{url_for('home.index')}}">首页</a></li>
                 <li class="active">用户反馈</a></li>
             </ol>
+
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h5>
@@ -98,7 +103,10 @@
                     </div>
                 </div>
                 <div class="panel-body">
-
+                    <button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary"
+                            autocomplete="off">
+                        加载更多留言...
+                    </button>
                 </div>
             </div>
         </div>
