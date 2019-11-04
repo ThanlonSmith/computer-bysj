@@ -48,18 +48,6 @@
                             <a href="javascript:;" style="font-weight: bold"><span
                                     class=""></span>&nbsp;资讯</a>
                         </li>
-                        <!--                        <li class="dropdown" style="margin-left: 3px;">-->
-                        <!--                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold">-->
-                        <!--                                教程<span class="caret"></span>-->
-                        <!--                            </a>-->
-                        <!--                            <ul class="dropdown-menu" role="menu">-->
-                        <!--                                <li><a href="#">Python教程</a></li>-->
-                        <!--                                <li><a href="#">Flask教程</a></li>-->
-                        <!--                                <li><a href="#">Django教程</a></li>-->
-                        <!--                                <li><a href="#">Java教程</a></li>-->
-                        <!--                                <li><a href="#">C++教程</a></li>-->
-                        <!--                            </ul>-->
-                        <!--                        </li>-->
                         <li>
                             <a class="curlink" href="javascript:;"
                                style="font-weight: bold;"><span
@@ -121,12 +109,13 @@
     </div>
 </div>
 <!-- 用于注册的模态框 -->
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+<div class="modal fade bs-example-modal-lg" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
         <div class="panel panel-primary">
-            <div class="panel-heading">
+            <div class="panel-heading" style="background-color: #0e91e8">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
-                                                                                                  class="glyphicon glyphicon-remove-sign"></span>
+                                                                                                  class="glyphicon glyphicon-remove-sign"
+                                                                                                  style="color: white"></span>
                 </button>
                 <h3 class="panel-title"><span class="glyphicon glyphicon-plus"></span>&nbsp;注册</h3>
             </div>
@@ -135,31 +124,47 @@
                     <fieldset>
                         <div class="form-group">
                             <label for=""><span
-                                    class="glyphicon glyphicon-user"></span>&nbsp;用户名</label>
-                            <input type="text" class="form-control" id="" placeholder=""
-                                   maxlength="4" minlength="4" autofocus="autofocus">
+                                    class="glyphicon glyphicon-user"></span>&nbsp;账号</label>
+                            <input type="text" class="form-control" id="" placeholder="请输入用户名"
+                                   maxlength="" minlength="" autofocus="autofocus">
                         </div>
-
+                        <div class="form-group">
+                            <label for=""><span
+                                    class="glyphicon glyphicon-user"></span>&nbsp;手机号</label>
+                            <input type="text" class="form-control" id="" placeholder="请输入注册使用的手机号"
+                                   maxlength="" minlength="" autofocus="autofocus">
+                        </div>
                         <div class="form-group">
                             <label for=""><span
                                     class="glyphicon glyphicon-lock"></span>密码</label>
-                            <input type="text" class="form-control" placeholder=""
-                                   maxlength="4" minlength="4">
-
+                            <input type="text" class="form-control" placeholder="请输入密码"
+                                   maxlength="" minlength="">
                         </div>
                         <div class="form-group">
                             <label for=""><span
                                     class="glyphicon glyphicon-lock"></span>确认密码</label>
-                            <input type="text" class="form-control" placeholder=""
+                            <input type="text" class="form-control" placeholder="再次输入密码"
                                    maxlength="4" minlength="4">
                         </div>
-
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                已有账号，请直接<a href="javascript:">登录</a>!&nbsp;注册前请您详细阅读本站《<a href="javascript:">用户协议</a>》,如注册,则默认您同意本协议!
+                        <div class="form-group">
+                            <label for="input_password"><span
+                                    class="glyphicon glyphicon-lock"></span>&nbsp;手机验证码</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="输入4位手机验证码"
+                                       maxlength="4" minlength="4">
+                                <span class="input-group-addon">
+										<input type="button" value="获取手机验证码"
+                                               onclick="sendCode(this)" style="border:none">
+                                    </span>
                             </div>
-                            <input type="submit" class="btn btn-log btn-primary btn-block" value="注册">
-                        </div>
+                            <div class="col-md-12" style="padding: 0;margin-top: 8px">
+                                <div class="form-group">
+                                    已有账号，请直接<a href="javascript:">登录</a>!&nbsp;注册前请您详细阅读本站《<a
+                                        href="javascript:">用户协议</a>》,如注册,则默认您同意本协议!
+                                </div>
+                                <input type="submit" class="btn btn-log btn-primary btn-block" value="注册"
+                                       style="background-color: #0e91e8">
+                            </div>
                     </fieldset>
                 </form>
             </div>
@@ -169,11 +174,12 @@
 <!--用于注册的模态框/-->
 <!--用于登录的模态框-->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-sm" role="document">
         <div class="panel panel-primary">
-            <div class="panel-heading">
+            <div class="panel-heading" style="background-color: #0e91e8">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
-                                                                                                  class="glyphicon glyphicon-remove-sign"></span>
+                                                                                                  class="glyphicon glyphicon-remove-sign"
+                                                                                                  style="color: white"></span>
                 </button>
                 <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;登录</h3>
             </div>
@@ -194,9 +200,10 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                没有账号，请先<a href="">注册</a>！
+                                没有账号，请先<a href="javascript:">注册</a>！登录出错，<a href="javascript:">找回用户名</a>，<a href="javascript:">找回密码</a>！
                             </div>
-                            <input type="submit" class="btn btn-log btn-primary btn-block" value="登录">
+                            <input type="submit" class="btn btn-log btn-primary btn-block" value="登录"
+                                   style="background-color: #0e91e8">
                         </div>
                     </fieldset>
                 </form>
