@@ -120,8 +120,7 @@
         </nav>
     </div>
 </div>
-<!-- Modal -->
-
+<!-- 用于注册的模态框 -->
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="panel panel-primary">
@@ -157,7 +156,7 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                已有账号，请直接<a href="">登录</a>!&nbsp;注册前请您详细阅读本站《<a href="/aboutUs/">用户协议</a>》,如注册,则默认您同意本协议!
+                                已有账号，请直接<a href="javascript:">登录</a>!&nbsp;注册前请您详细阅读本站《<a href="javascript:">用户协议</a>》,如注册,则默认您同意本协议!
                             </div>
                             <input type="submit" class="btn btn-log btn-primary btn-block" value="注册">
                         </div>
@@ -167,6 +166,8 @@
         </div>
     </div>
 </div>
+<!--用于注册的模态框/-->
+<!--用于登录的模态框-->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="panel panel-primary">
@@ -177,7 +178,7 @@
                 <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;登录</h3>
             </div>
             <div class="panel-body">
-                <form method="post">
+                <form>
                     <fieldset>
                         <div class="form-group">
                             <label for=""><span
@@ -185,13 +186,11 @@
                             <input type="text" class="form-control" id="" placeholder=""
                                    maxlength="4" minlength="4" autofocus="autofocus">
                         </div>
-
                         <div class="form-group">
                             <label for=""><span
                                     class="glyphicon glyphicon-lock"></span>密码</label>
                             <input type="text" class="form-control" placeholder=""
                                    maxlength="4" minlength="4">
-
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
@@ -205,6 +204,7 @@
         </div>
     </div>
 </div>
+<!--用于登录的模态框/-->
 <!--导航-->
 {% block content %}
 {% endblock %}
