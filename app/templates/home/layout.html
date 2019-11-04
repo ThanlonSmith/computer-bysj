@@ -46,17 +46,22 @@
                         </li>
                         <li>
                             <a href="javascript:;" style="font-weight: bold"><span
-                                    class=""></span>&nbsp;资讯</a>
+                                    class=""></span>&nbsp;科技资讯</a>
                         </li>
                         <li>
                             <a class="curlink" href="javascript:;"
                                style="font-weight: bold;"><span
-                                    class=""></span>&nbsp;教程</a>
+                                    class=""></span>&nbsp;IT教程</a>
+                        </li>
+                            <li>
+                            <a class="curlink" href="javascript:;"
+                               style="font-weight: bold;"><span
+                                    class=""></span>&nbsp;证书考试</a>
                         </li>
                         <li>
                             <a class="curlink" href="{{url_for('home.mall')}}"
                                style="font-weight: bold;"><span
-                                    class=""></span>&nbsp;商城</a>
+                                    class=""></span>&nbsp;源码商城</a>
                         </li>
                         <li>
                             <a class="curlink" href="javascript:;"
@@ -71,7 +76,7 @@
                         <li>
                             <a class="curlink" href="{{url_for('home.feedback')}}"
                                style="font-weight: bold;"><span
-                                    class=""></span>&nbsp;用户反馈</a>
+                                    class=""></span>&nbsp;留言反馈</a>
                         </li>
 
                     </ul>
@@ -109,7 +114,8 @@
     </div>
 </div>
 <!-- 用于注册的模态框 -->
-<div class="modal fade bs-example-modal-lg" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade bs-example-modal-lg" id="registerModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-sm" role="document">
         <div class="panel panel-primary">
             <div class="panel-heading" style="background-color: #0e91e8">
@@ -120,50 +126,57 @@
                 <h3 class="panel-title"><span class="glyphicon glyphicon-plus"></span>&nbsp;注册</h3>
             </div>
             <div class="panel-body">
-                <form method="post">
+                <form>
                     <fieldset>
                         <div class="form-group">
                             <label for=""><span
                                     class="glyphicon glyphicon-user"></span>&nbsp;账号</label>
-                            <input type="text" class="form-control" id="" placeholder="请输入用户名"
-                                   maxlength="" minlength="" autofocus="autofocus">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="请输入用户名"
+                                   maxlength="15" autofocus="autofocus">
+                            <div style="color: #dd1144;font-weight: bold" id="name_error"></div>
                         </div>
                         <div class="form-group">
                             <label for=""><span
                                     class="glyphicon glyphicon-user"></span>&nbsp;手机号</label>
-                            <input type="text" class="form-control" id="" placeholder="请输入注册使用的手机号"
-                                   maxlength="" minlength="" autofocus="autofocus">
+                            <input type="text" class="form-control" id="mobile_number" name="mobile_number"
+                                   placeholder="请输入手机号"
+                                   minlength="11" maxlength="11" autofocus="autofocus">
+                            <div style="color: #dd1144;font-weight: bold" id="mobile_number_error"></div>
                         </div>
                         <div class="form-group">
                             <label for=""><span
                                     class="glyphicon glyphicon-lock"></span>密码</label>
-                            <input type="text" class="form-control" placeholder="请输入密码"
-                                   maxlength="" minlength="">
+                            <input type="password" id="pwd" name="pwd" class="form-control" placeholder="请输入密码"
+                                   maxlength="20" minlength="6">
+                            <div style="color: #dd1144;font-weight: bold" id="pwd_error"></div>
                         </div>
                         <div class="form-group">
                             <label for=""><span
                                     class="glyphicon glyphicon-lock"></span>确认密码</label>
-                            <input type="text" class="form-control" placeholder="再次输入密码"
-                                   maxlength="4" minlength="4">
+                            <input type="password" id="sure_pwd" name="sure_pwd" class="form-control"
+                                   placeholder="再次输入密码"
+                                   maxlength="20" minlength="6">
+                            <div style="color: #dd1144;font-weight: bold" id="sure_pwd_error"></div>
                         </div>
                         <div class="form-group">
                             <label for="input_password"><span
                                     class="glyphicon glyphicon-lock"></span>&nbsp;手机验证码</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="输入4位手机验证码"
+                                <input type="text" id="code" name="code" class="form-control" placeholder="输入4位手机验证码"
                                        maxlength="4" minlength="4">
                                 <span class="input-group-addon">
 										<input type="button" value="获取手机验证码"
                                                onclick="sendCode(this)" style="border:none">
                                     </span>
                             </div>
+                            <div style="color: #dd1144;font-weight: bold" id="code_error"></div>
                             <div class="col-md-12" style="padding: 0;margin-top: 8px">
                                 <div class="form-group">
                                     已有账号，请直接<a href="javascript:">登录</a>!&nbsp;注册前请您详细阅读本站《<a
                                         href="javascript:">用户协议</a>》,如注册,则默认您同意本协议!
                                 </div>
-                                <input type="submit" class="btn btn-log btn-primary btn-block" value="注册"
-                                       style="background-color: #0e91e8">
+                                <input type="button" class="btn btn-log btn-primary btn-block" value="注册"
+                                       style="background-color: #0e91e8" id="register">
                             </div>
                     </fieldset>
                 </form>
@@ -200,7 +213,8 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                没有账号，请先<a href="javascript:">注册</a>！登录出错，<a href="javascript:">找回用户名</a>，<a href="javascript:">找回密码</a>！
+                                没有账号，请先<a href="javascript:">注册</a>！登录出错，<a href="javascript:">找回用户名</a>，<a
+                                    href="javascript:">找回密码</a>！
                             </div>
                             <input type="submit" class="btn btn-log btn-primary btn-block" value="登录"
                                    style="background-color: #0e91e8">
