@@ -7,8 +7,10 @@
 # @Software: PyCharm
 from .. import home_bp
 from flask import render_template
+from app.models import connect_db
 
 
-# @home_bp.route('/login')
-# def login():
-#     return render_template('home/layout.html.bak')
+@home_bp.route('/v1/register')
+def register():
+    
+    return '注册成功！'
