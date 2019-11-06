@@ -20,13 +20,15 @@ engine = create_engine(
     pool_timeout=30,  # 连接池中没有连接最多等待的时间，否则会报错，30s
     pool_recycle=-1,  # 多久之后对线程池中的线程中进行一次连接的回收（重置）-1表示不重置
 )
+SessionFactory = sessionmaker(bind=engine)
 
 
 # 用户表
 class Users(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
-    name = Column(String(18), unique=True)
+    name = Column(String(10), unique=True)
+    nikename = Column(String(10), unique=True)
     pwd = Column(String(20))
     email = Column(String(30), unique=True)
     mobile_number = Column(String(11), unique=True)
@@ -57,7 +59,6 @@ def drop_table():
 
 # connect database
 def connect_db():
-    SessionFactory = sessionmaker(bind=engine)
     # 去连接池获取一个连接
     session = scoped_session(SessionFactory)
     return session
