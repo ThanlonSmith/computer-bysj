@@ -53,6 +53,7 @@ class DevelopmentConfig(Config):
         database='39bysj',
         charset='utf8'
     )
+    SECRET_KEY = '0160a068dba74c5aa21f5b93cc6b95c5'
 
 
 class TestingConfig(Config):
