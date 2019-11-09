@@ -26,15 +26,15 @@ SessionFactory = sessionmaker(bind=engine)
 # 用户表
 class Users(Base):
     __tablename__ = 'users'
-    id = Column(Integer, primary_key=True)
-    name = Column(String(10), unique=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(10), unique=True, nullable=False)
     nikename = Column(String(10), unique=True)
-    pwd = Column(String(20))
+    pwd = Column(String(20), nullable=False)
     email = Column(String(30), unique=True)
-    mobile_number = Column(String(11), unique=True)
+    mobile_number = Column(String(11), unique=True, nullable=False)
     person_info = Column(Text)
     avatar = Column(String(100))
-    register_time = Column(DateTime, index=True, default=datetime.now())
+    register_time = Column(DateTime, index=True, default=datetime.now(), nullable=False)
     message = relationship("Message", backref='users')
 
 
@@ -42,8 +42,8 @@ class Users(Base):
 class Message(Base):
     __tablename__ = "message"
     id = Column(Integer, primary_key=True)
-    content = Column(Text)
-    leave_msg_time = Column(DateTime, index=True, default=datetime.now())
+    content = Column(Text, nullable=False)
+    leave_msg_time = Column(DateTime, index=True, default=datetime.now(), nullable=False)
     users_id = Column(Integer, ForeignKey('users.id'))
 
 
@@ -60,10 +60,14 @@ def drop_table():
 # connect database
 def connect_db():
     # 去连接池获取一个连接
-    session = scoped_session(SessionFactory)
+    session = SessionFactory()
     return session
 
 
 if __name__ == '__main__':
-    create_table()
+    # create_table()
+    session = connect_db()
+    # ret = session.query(Users).all()  # 列表类型,里面存储对象
+    # ret = session.query(Users).filter(Users.mobile_number==18512152005).count()  # 列表中的对象
+    # print(ret)
     # drop_table()

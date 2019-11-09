@@ -132,7 +132,7 @@
                             <label for="name"><span
                                     class="glyphicon glyphicon-user"></span>&nbsp;账号</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="请输入用户名"
-                                   maxlength="10" autofocus="autofocus">
+                                   maxlength="12" autofocus="autofocus">
                             <div style="color: #dd1144;font-weight: bold" id="name_error"></div>
                         </div>
                         <div class="form-group">
@@ -174,6 +174,7 @@
                             <div class="col-md-12" style="padding: 0;margin-top: 8px">
                                 <div class="form-group">
                                     <div style="color: green;font-weight: bold" id="reg_success"></div>
+                                    <div style="color: red;font-weight: bold" id="reg_error"></div>
                                     已有账号，请直接<a href="javascript:">登录</a>!&nbsp;注册前请您详细阅读本站《<a
                                         href="javascript:">用户协议</a>》,如注册,则默认您同意本协议!
                                 </div>
@@ -203,23 +204,27 @@
                 <form>
                     <fieldset>
                         <div class="form-group">
-                            <label for=""><span
-                                    class="glyphicon glyphicon-user"></span>&nbsp;用户名</label>
-                            <input type="text" class="form-control" id="" placeholder=""
-                                   maxlength="4" minlength="4" autofocus="autofocus">
+                            <label for="login_name"><span
+                                    class="glyphicon glyphicon-user"></span>&nbsp;账号</label>
+                            <input type="text" class="form-control" id="login_name" placeholder="请输入账号或手机号"
+                                   maxlength="12" autofocus="autofocus">
+                            <div style="color: #dd1144;font-weight: bold" id="login_name_error"></div>
                         </div>
                         <div class="form-group">
-                            <label for=""><span
+                            <label for="login_pwd"><span
                                     class="glyphicon glyphicon-lock"></span>密码</label>
-                            <input type="text" class="form-control" placeholder=""
-                                   maxlength="4" minlength="4">
+                            <input type="password" class="form-control" id="login_pwd" placeholder="请输入密码"
+                                   maxlength="20">
+                            <div style="color: #dd1144;font-weight: bold" id="login_pwd_error"></div>
                         </div>
-                        <div class="col-md-12">
+                        <div style="color: red;font-weight: bold" id="login_error"></div>
+                        <div class="col-md-12" style="padding: 0;margin-top: 8px">
                             <div class="form-group">
                                 没有账号，请先<a href="javascript:">注册</a>！登录出错，<a href="javascript:">找回用户名</a>，<a
                                     href="javascript:">找回密码</a>！
                             </div>
-                            <input type="submit" class="btn btn-log btn-primary btn-block" value="登录"
+                            <input type="button" class="btn btn-log btn-primary btn-block" value="登录"
+                                   onclick="user_login()"
                                    style="background-color: #0e91e8">
                         </div>
                     </fieldset>
@@ -307,125 +312,42 @@
         $('body').css('background-color', '#f3f4f7');
     });
 
-    function user_register() {
-        var name = $('#name').val();
-        var mobile_number = $('#mobile_number').val();
-        var pwd = $('#pwd').val();
-        var sure_pwd = $('#sure_pwd').val();
-        var verify_code = $('#verify_code').val();
-        if (name == null || name.length === 0) {
-            $('#name_error').text('用户名不能为空！');
+    function user_login() {
+        // alert('1');
+        name = $('#login_name').val();
+        pwd = $('#login_pwd').val();
+        // console.log(name);
+        // console.log(pwd);
+        if (name == null || name.length == 0) {
+            $('#login_name_error').text('账号不能为空！');
             return;
         }
-        var reg_name = /^[a-zA-Z0-9_-]{0,10}$/;
-        if (!reg_name.test(name)) {
-            $('#name_error').text('用户名格式不正确！');
-        }
-        if (mobile_number == null || mobile_number.length === 0) {
-            $('#mobile_number_error').text('手机号不能为空！');
+        if (pwd == null || pwd.length == 0) {
+            $('#login_pwd_error').text('密码不能为空！');
             return;
         }
-        var reg_mobile_number = /^1[345789]\d{9}$/;
-        if (!reg_mobile_number.test(mobile_number)) {
-            $('#mobile_number_error').text('手机号格式不正确！');
-            return;
-        }
-        if (pwd == null || pwd.length === 0) {
-            $('#pwd_error').text('密码不能为空！');
-            return;
-        }
-        var reg_pwd = /^[a-zA-Z][a-zA-Z0-9_]{6,15}$/;
+        reg_pwd = /^[a-zA-Z][a-zA-Z0-9_]{6,15}$/;
         if (!reg_pwd.test(pwd)) {
-            $('#pwd_error').text('密码格式错误！');
+            $('#login_pwd_error').text('密码格式不正确！');
             return;
         }
-        if (sure_pwd == null || sure_pwd.length === 0) {
-            $('#sure_pwd_error').text('确认密码不能为空！');
-            return;
-        }
-        if (!reg_pwd.test(name)) {
-            $('#sure_pwd_error').text('确认密格式不正确！');
-            return;
-        }
-        if (sure_pwd !== pwd) {
-            $('#sure_pwd_error').text('两次输入密码不一致！');
-            return;
-        }
-        if (verify_code == null || verify_code.length === 0) {
-            $('#code_error').text('手机验证码不能为空！');
-            return;
-        }
-        var reg_code = /[0-9]{6,6}$/;
-        if (!reg_code.test(verify_code)) {
-            $('#code_error').text('手机验证码格式错误！');
-            return;
-        }
-
         $.ajax({
-            url: '/v1/register',
+            url: '/v1/login',
             type: 'post',
             data: {
                 'name': name,
-                'mobile_number': mobile_number,
-                'pwd': pwd,
-                'verify_code': verify_code,
+                'pwd': pwd
             },
             success: function (data) {
                 // alert(data);
                 if (data == 'ok') {
-                    $('#reg_success').text('注册成功，您可以登录了……')
                     location.href = '/'
-                } else {
-                    $('#code_error').text(data)
+                }
+                if (data == 'error') {
+                    $('#login_error').text('用户名或密码错误！')
                 }
             }
         })
-    }
-
-    function send_verification_code(ths) {
-        //获取手机号
-        var mobile_number = $('#mobile_number').val();
-        // alert(mobile_number);
-        // 定义手机号的正则
-        var pattern = /^1[345789]\d{9}$/;
-        // 判断是否输入手机号以及格式格式是否正确
-        if (mobile_number === "" || mobile_number.length == 0) {
-            alert("手机号不能为空!");
-            return;
-        }
-        if (!pattern.test(mobile_number)) {
-            alert("手机号格式错误!");
-            return;
-        } else {
-            $.ajax({
-                url: '/v1/send_code',
-                type: 'post',
-                data: {
-                    'mobile_number': mobile_number
-                },
-                success: function (data) {
-                    if (data) {
-                        if (data == 'ok') {
-                            alert('已经发送！')
-                        }
-                    }
-                }
-            });
-            // 如果输入手机号先让发送按钮不可用
-            // ths.setAttribute("disabled", "disabled");
-            // 设置倒计时时间
-            var count = 60;
-            // 设置定时器控制用户发送请求验证码的时间间隔
-            var timer = setInterval(function () {
-                ths.value = count + "s";
-                count--;
-                if (count < 0) {
-                    ths.removeAttribute("disabled");
-                    clearInterval(timer);
-                    ths.value = "获取手机验证码";
-                }
-            }, 1000);
-        }
     }
 </script>
 {% block js %}

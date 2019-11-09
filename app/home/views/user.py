@@ -7,13 +7,15 @@
 # @Software: PyCharm
 from .. import home_bp
 from flask import render_template, request, session
-from app.models import connect_db
+from app.models import connect_db, Users
 from random import randint
 import requests
+from sqlalchemy import or_
 
 
 @home_bp.route('/v1/send_code', methods=['GET', 'POST'])
 def send_code():
+    msg = None
     random_verify_code = str(randint(100000, 999999))
     session['random_verify_code'] = random_verify_code
     # print(session['random_verify_code'],type(session['random_verify_code']))
@@ -21,21 +23,67 @@ def send_code():
     # print(mobile_number)
     req_url = "http://api.feige.ee/SmsService/Send"
     data = {"Account": "18937693205", "Pwd": "61a8ea729e25f1cf745066d33",
-            "Content": "验证码:" + random_verify_code + "。此验证码仅用于校验身份以注册/登录https://bysj39.com，10分钟内有效。",
+            "Content": "验证码:" + random_verify_code + "。您正在使用短信验证码注册登录功能，该验证码仅用于身份校验，请勿泄露给他人使用。",
             "Mobile": mobile_number, "SignId": 106861}
     response = requests.post(req_url, data=data)
     # print(response.content)
-    return 'ok'
+    msg = 'ok'
+    return msg
 
 
 @home_bp.route('/v1/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        msg = None
         verify_code = request.form.get('verify_code')
         # print(verify_code, session['random_verify_code'])
         if verify_code != session['random_verify_code']:
-            return '手机验证码输入错误！'
+            msg = 'verify_code_err'
+            return msg
         name = request.form.get('name')
         mobile_number = request.form.get('mobile_number')
         pwd = request.form.get('pwd')
-        return 'ok'  # 对应ajax中的data
+        session_ = connect_db()
+        name_count = ret = session_.query(Users).filter(Users.mobile_number == mobile_number).count()
+        if name_count > 0:
+            msg = 'name_error'
+            return msg
+        try:
+            user_obj = Users(
+                name=name,
+                pwd=pwd,
+                mobile_number=mobile_number
+            )
+            session_.add(user_obj)
+            session_.commit()
+            session_.close()
+        except Exception as e:
+            msg = 'db_error'
+            return msg
+        msg = 'ok'
+        return msg
+
+
+@home_bp.route('/v1/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        msg = None
+        name = request.form.get('name')
+        pwd = request.form.get('pwd')
+        # print(name, pwd)
+        session_ = connect_db()
+        user_obj = session_.query(Users).filter(or_(Users.name == name, Users.mobile_number == name),
+                                                Users.pwd == pwd)
+        count = user_obj.count()
+        id = user_obj.first().id
+        name = user_obj.first().name
+        # print(count, id, name)
+        session['id'] = id
+        session['name'] = name
+
+        if count > 0:
+            msg = 'ok'
+            return msg
+        else:
+            msg = 'error'
+            return msg
