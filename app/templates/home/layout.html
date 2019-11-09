@@ -381,6 +381,52 @@
             }
         })
     }
+
+    function send_verification_code(ths) {
+        //获取手机号
+        var mobile_number = $('#mobile_number').val();
+        // alert(mobile_number);
+        // 定义手机号的正则
+        var pattern = /^1[345789]\d{9}$/;
+        // 判断是否输入手机号以及格式格式是否正确
+        if (mobile_number === "" || mobile_number.length == 0) {
+            alert("手机号不能为空!");
+            return;
+        }
+        if (!pattern.test(mobile_number)) {
+            alert("手机号格式错误!");
+            return;
+        } else {
+            $.ajax({
+                url: '/v1/send_code',
+                type: 'post',
+                data: {
+                    'mobile_number': mobile_number
+                },
+                success: function (data) {
+                    if (data) {
+                        if (data == 'ok') {
+                            alert('已经发送！')
+                        }
+                    }
+                }
+            });
+            // 如果输入手机号先让发送按钮不可用
+            // ths.setAttribute("disabled", "disabled");
+            // 设置倒计时时间
+            var count = 60;
+            // 设置定时器控制用户发送请求验证码的时间间隔
+            var timer = setInterval(function () {
+                ths.value = count + "s";
+                count--;
+                if (count < 0) {
+                    ths.removeAttribute("disabled");
+                    clearInterval(timer);
+                    ths.value = "获取手机验证码";
+                }
+            }, 1000);
+        }
+    }
 </script>
 {% block js %}
 {% endblock %}
