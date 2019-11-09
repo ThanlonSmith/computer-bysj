@@ -1,3 +1,5 @@
+import da from "../../admin/adminlte-master/bower_components/moment/src/locale/da";
+
 console.log('已加载register.js');
 $(document).ready(function () {
     // 表单控件的验证
@@ -61,16 +63,16 @@ $(document).ready(function () {
             $('#pwd_error').text('');
         }
     });
-    $('#vertification_code').bind('input', function () {
+    $('#verify_code').bind('input', function () {
         var reg_code = /[0-9]{6,6}$/;
-        var vertification_code = $('#vertification_code').val();
-        if (vertification_code.length < 6) {
+        var verify_code = $('#vertification_code').val();
+        if (verify_code.length < 6) {
             $('#code_error').text('验证码必须是6位');
         }
-        if (!reg_code.test(vertification_code)) {
+        if (!reg_code.test(verify_code)) {
             $('#code_error').text('验证码必须是6位,必须都是数字!');
         }
-        if (reg_code.test(vertification_code) || vertification_code.length === 0) {
+        if (reg_code.test(verify_code) || verify_code.length === 0) {
             $('#code_error').text('');
         }
     })
@@ -83,9 +85,25 @@ function send_verification_code(ths) {
     // 定义手机号的正则
     var pattern = /^1[345789]\d{9}$/;
     // 判断是否输入手机号以及格式格式是否正确
-    if (mobile_number === "" || mobile_number == null || !pattern.test(mobile_number)) {
+    if (mobile_number === "" || mobile_number.length == 0) {
+        alert("手机号不能为空!");
+        return;
+    }
+    if (!pattern.test(mobile_number)) {
         alert("手机号格式错误!");
+        return
     } else {
+        $.ajax({
+            url: 'v1/send_code/',
+            type: 'get',
+            success: function (data) {
+                if (data) {
+                    if (data == 'okey') {
+                        alert('已经发送！')
+                    }
+                }
+            }
+        });
         // 如果输入手机号先让发送按钮不可用
         // ths.setAttribute("disabled", "disabled");
         // 设置倒计时时间
