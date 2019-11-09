@@ -129,14 +129,14 @@
                 <form>
                     <fieldset>
                         <div class="form-group">
-                            <label for=""><span
+                            <label for="name"><span
                                     class="glyphicon glyphicon-user"></span>&nbsp;账号</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="请输入用户名"
                                    maxlength="10" autofocus="autofocus">
                             <div style="color: #dd1144;font-weight: bold" id="name_error"></div>
                         </div>
                         <div class="form-group">
-                            <label for=""><span
+                            <label for="mobile_number"><span
                                     class="glyphicon glyphicon-user"></span>&nbsp;手机号</label>
                             <input type="text" class="form-control" id="mobile_number" name="mobile_number"
                                    placeholder="请输入手机号"
@@ -144,14 +144,14 @@
                             <div style="color: #dd1144;font-weight: bold;" id="mobile_number_error"></div>
                         </div>
                         <div class="form-group">
-                            <label for=""><span
+                            <label for="pwd"><span
                                     class="glyphicon glyphicon-lock"></span>密码</label>
                             <input type="password" id="pwd" name="pwd" class="form-control" placeholder="请输入密码"
                                    maxlength="20" minlength="6">
                             <div style="color: #dd1144;font-weight: bold" id="pwd_error"></div>
                         </div>
                         <div class="form-group">
-                            <label for=""><span
+                            <label for="sure_pwd"><span
                                     class="glyphicon glyphicon-lock"></span>确认密码</label>
                             <input type="password" id="sure_pwd" name="sure_pwd" class="form-control"
                                    placeholder="再次输入密码"
@@ -159,11 +159,11 @@
                             <div style="color: #dd1144;font-weight: bold" id="sure_pwd_error"></div>
                         </div>
                         <div class="form-group">
-                            <label for="vertification_code"><span
+                            <label for="verify_code"><span
                                     class="glyphicon glyphicon-lock"></span>&nbsp;手机验证码</label>
                             <div class="input-group">
-                                <input type="text" id="vertification_code" name="vertification_code"
-                                       class="form-control" placeholder="输入4位手机验证码"
+                                <input type="text" id="verify_code" name="verify_code"
+                                       class="form-control" placeholder="输入6位手机验证码"
                                        maxlength="6" minlength="6">
                                 <span class="input-group-addon">
 										<input type="button" value="获取手机验证码"
@@ -173,6 +173,7 @@
                             <div style="color: #dd1144;font-weight: bold" id="code_error"></div>
                             <div class="col-md-12" style="padding: 0;margin-top: 8px">
                                 <div class="form-group">
+                                    <div style="color: green;font-weight: bold" id="reg_success"></div>
                                     已有账号，请直接<a href="javascript:">登录</a>!&nbsp;注册前请您详细阅读本站《<a
                                         href="javascript:">用户协议</a>》,如注册,则默认您同意本协议!
                                 </div>
@@ -311,12 +312,74 @@
         var mobile_number = $('#mobile_number').val();
         var pwd = $('#pwd').val();
         var sure_pwd = $('#sure_pwd').val();
-        var vertification_code = $('#vertification_code').val();
-        console.log(name);
-        console.log(mobile_number);
-        console.log(pwd);
-        console.log(sure_pwd);
-        console.log(vertification_code);
+        var verify_code = $('#verify_code').val();
+        if (name == null || name.length === 0) {
+            $('#name_error').text('用户名不能为空！');
+            return;
+        }
+        var reg_name = /^[a-zA-Z0-9_-]{0,10}$/;
+        if (!reg_name.test(name)) {
+            $('#name_error').text('用户名格式不正确！');
+        }
+        if (mobile_number == null || mobile_number.length === 0) {
+            $('#mobile_number_error').text('手机号不能为空！');
+            return;
+        }
+        var reg_mobile_number = /^1[345789]\d{9}$/;
+        if (!reg_mobile_number.test(mobile_number)) {
+            $('#mobile_number_error').text('手机号格式不正确！');
+            return;
+        }
+        if (pwd == null || pwd.length === 0) {
+            $('#pwd_error').text('密码不能为空！');
+            return;
+        }
+        var reg_pwd = /^[a-zA-Z][a-zA-Z0-9_]{6,15}$/;
+        if (!reg_pwd.test(pwd)) {
+            $('#pwd_error').text('密码格式错误！');
+            return;
+        }
+        if (sure_pwd == null || sure_pwd.length === 0) {
+            $('#sure_pwd_error').text('确认密码不能为空！');
+            return;
+        }
+        if (!reg_pwd.test(name)) {
+            $('#sure_pwd_error').text('确认密格式不正确！');
+            return;
+        }
+        if (sure_pwd !== pwd) {
+            $('#sure_pwd_error').text('两次输入密码不一致！');
+            return;
+        }
+        if (verify_code == null || verify_code.length === 0) {
+            $('#code_error').text('手机验证码不能为空！');
+            return;
+        }
+        var reg_code = /[0-9]{6,6}$/;
+        if (!reg_code.test(verify_code)) {
+            $('#code_error').text('手机验证码格式错误！');
+            return;
+        }
+
+        $.ajax({
+            url: '/v1/register',
+            type: 'post',
+            data: {
+                'name': name,
+                'mobile_number': mobile_number,
+                'pwd': pwd,
+                'verify_code': verify_code,
+            },
+            success: function (data) {
+                // alert(data);
+                if (data == 'ok') {
+                    $('#reg_success').text('注册成功，您可以登录了……')
+                    location.href = '/'
+                } else {
+                    $('#code_error').text(data)
+                }
+            }
+        })
     }
 </script>
 {% block js %}
