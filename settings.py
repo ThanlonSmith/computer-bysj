@@ -54,6 +54,7 @@ class DevelopmentConfig(Config):
         charset='utf8'
     )
     SECRET_KEY = '0160a068dba74c5aa21f5b93cc6b95c5'
+    SALT = b'thanlon'
 
 
 class TestingConfig(Config):

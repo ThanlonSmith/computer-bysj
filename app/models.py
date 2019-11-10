@@ -29,19 +29,28 @@ class Users(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(10), unique=True, nullable=False)
     nikename = Column(String(10), unique=True)
-    pwd = Column(String(20), nullable=False)
+    pwd = Column(String(32), nullable=False)
     email = Column(String(30), unique=True)
     mobile_number = Column(String(11), unique=True, nullable=False)
     person_info = Column(Text)
     avatar = Column(String(100))
     register_time = Column(DateTime, index=True, default=datetime.now(), nullable=False)
     message = relationship("Message", backref='users')
+    users_login_log = relationship("UsersLoginLogs", backref='users')
+
+
+class UsersLoginLogs(Base):
+    __tablename__ = 'usersloginlogs'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    ip = Column(String(15))
+    login_time = Column(DateTime, index=True, default=datetime.now(), nullable=False)
+    users_id = Column(Integer, ForeignKey('users.id'))
 
 
 # message
 class Message(Base):
     __tablename__ = "message"
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     content = Column(Text, nullable=False)
     leave_msg_time = Column(DateTime, index=True, default=datetime.now(), nullable=False)
     users_id = Column(Integer, ForeignKey('users.id'))
@@ -65,9 +74,10 @@ def connect_db():
 
 
 if __name__ == '__main__':
-    # create_table()
-    session = connect_db()
+    pass
+    create_table()
+    # drop_table()
+    # session = connect_db()
     # ret = session.query(Users).all()  # 列表类型,里面存储对象
     # ret = session.query(Users).filter(Users.mobile_number==18512152005).count()  # 列表中的对象
     # print(ret)
-    # drop_table()
