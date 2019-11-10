@@ -81,7 +81,7 @@
 
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        {% if "user" not in session %}
+                        {% if "name" not in session %}
                         <li>
                             <a data-toggle="modal" data-target="#loginModal" href=""
                                style="font-weight: bold;">&nbsp;登录</a>
@@ -91,20 +91,22 @@
                                style="font-weight: bold;">&nbsp;注册</a>
                         </li>
                         {% endif %}
-                        {% if "user" in session %}
+                        {% if "name" in session %}
                         <li>
-                            <a class="curlink" href="" style="font-weight: bold"><span
-                                    class=""></span>&nbsp;退出</a>
-                        </li>
-                        <li>
-                            <a class="curlink" href="" style="font-weight: bold"><span
-                                    class=""></span>&nbsp;{{session["user"]}}</a>
+                            <a class="curlink dropdown-toggle" data-toggle="dropdown" href="javascript:;"
+                               style="font-weight: bold;;"></span>&nbsp;{{session["name"]}}<span class="caret"></span></a>
+                            <ul class="dropdown-menu" style="">
+                                <li><a class="" href="/v1/user_center/" style="font-weight: bold"><span
+                                        class=""></span>&nbsp;会员中心</a></li>
+                                <li><a class="" href="/v1/logout/" style="font-weight: bold"></span><span
+                                        class=""></span>&nbsp;退出登录</a></li>
+                            </ul>
                         </li>
                         {% else %}
-                        <!--                                                <li>-->
-                        <!--                                                    <a class="curlink" href="" style="font-weight: bold"><span-->
-                        <!--                                                            class="glyphicon glyphicon-user"></span>&nbsp;会员中心</a>-->
-                        <!--                                                </li>-->
+                        <!--                        <li>-->
+                        <!--                            <a class="curlink" href="" style="font-weight: bold"><span-->
+                        <!--                                    class="glyphicon glyphicon-user"></span>&nbsp;会员中心</a>-->
+                        <!--                        </li>-->
                         {% endif %}
                     </ul>
                 </div>
@@ -220,7 +222,7 @@
                         <div style="color: red;font-weight: bold" id="login_error"></div>
                         <div class="col-md-12" style="padding: 0;margin-top: 8px">
                             <div class="form-group">
-                                没有账号，请先<a href="javascript:">注册</a>！登录出错，<a href="javascript:">找回用户名</a>，<a
+                                没有账号，请先<a href="javascript:">注册</a>！忘记用户名或密码，<a href="javascript:">找回用户名</a>，<a
                                     href="javascript:">找回密码</a>！
                             </div>
                             <input type="button" class="btn btn-log btn-primary btn-block" value="登录"
@@ -304,6 +306,8 @@
 <script src="https://cdn.bootcss.com/holder/2.9.6/holder.min.js"></script>
 <script src="{{url_for('static',filename='home/js/go_top.js')}}"></script>
 <script src="{{url_for('static',filename='home/js/register.js')}}"></script>
+<script src="{{url_for('static',filename='home/js/login.js')}}"></script>
+
 <script>
     $(document).ready(function () {
         // 初始化animate动画组件
@@ -311,44 +315,6 @@
         // 设置背景颜色
         $('body').css('background-color', '#f3f4f7');
     });
-
-    function user_login() {
-        // alert('1');
-        name = $('#login_name').val();
-        pwd = $('#login_pwd').val();
-        // console.log(name);
-        // console.log(pwd);
-        if (name == null || name.length == 0) {
-            $('#login_name_error').text('账号不能为空！');
-            return;
-        }
-        if (pwd == null || pwd.length == 0) {
-            $('#login_pwd_error').text('密码不能为空！');
-            return;
-        }
-        reg_pwd = /^[a-zA-Z][a-zA-Z0-9_]{6,15}$/;
-        if (!reg_pwd.test(pwd)) {
-            $('#login_pwd_error').text('密码格式不正确！');
-            return;
-        }
-        $.ajax({
-            url: '/v1/login',
-            type: 'post',
-            data: {
-                'name': name,
-                'pwd': pwd
-            },
-            success: function (data) {
-                // alert(data);
-                if (data == 'ok') {
-                    location.href = '/'
-                }
-                if (data == 'error') {
-                    $('#login_error').text('用户名或密码错误！')
-                }
-            }
-        })
-    }
 </script>
 {% block js %}
 {% endblock %}

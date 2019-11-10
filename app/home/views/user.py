@@ -6,11 +6,12 @@
 # @File    : user.py
 # @Software: PyCharm
 from .. import home_bp
-from flask import render_template, request, session
+from flask import request, session, redirect, url_for
 from app.models import connect_db, Users, UsersLoginLogs
 from random import randint
 import requests
 from sqlalchemy import or_
+from app.utils.md5 import md5
 
 
 @home_bp.route('/v1/send_code', methods=['GET', 'POST'])
@@ -43,6 +44,7 @@ def register():
         name = request.form.get('name')
         mobile_number = request.form.get('mobile_number')
         pwd = request.form.get('pwd')
+        pwd = md5(pwd)
         session_ = connect_db()
         name_count = ret = session_.query(Users).filter(Users.mobile_number == mobile_number).count()
         if name_count > 0:
@@ -70,6 +72,7 @@ def login():
         msg = None
         name = request.form.get('name')
         pwd = request.form.get('pwd')
+        pwd = md5(pwd)
         # print(name, pwd)
         session_ = connect_db()
         user_obj = session_.query(Users).filter(or_(Users.name == name, Users.mobile_number == name),
@@ -93,3 +96,9 @@ def login():
         else:
             msg = 'error'
             return msg
+
+
+@home_bp.route('/v1/logout/')
+def logout():
+    session.pop('name', None)
+    return redirect('/')
