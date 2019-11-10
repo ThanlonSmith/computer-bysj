@@ -63,7 +63,9 @@ $(document).ready(function () {
     });
     $('#verify_code').bind('input', function () {
         var reg_code = /[0-9]{6,6}$/;
-        var verify_code = $('#vertification_code').val();
+        var verify_code = $('#verify_code').val();
+        // alert(verify_code);
+        // alert(verify_code.length);
         if (verify_code.length < 6) {
             $('#code_error').text('验证码必须是6位');
         }

@@ -7,7 +7,7 @@
 # @Software: PyCharm
 from .. import home_bp
 from flask import render_template, request, session
-from app.models import connect_db, Users
+from app.models import connect_db, Users, UsersLoginLogs
 from random import randint
 import requests
 from sqlalchemy import or_
@@ -80,7 +80,13 @@ def login():
         # print(count, id, name)
         session['id'] = id
         session['name'] = name
-
+        login_logs_obj = UsersLoginLogs(
+            ip=request.remote_addr,
+            users_id=id,
+        )
+        session_.add(login_logs_obj)
+        session_.commit()
+        session_.close()
         if count > 0:
             msg = 'ok'
             return msg
