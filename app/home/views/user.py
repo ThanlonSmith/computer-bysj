@@ -66,7 +66,7 @@ def register():
         return msg
 
 
-@home_bp.route('/v1/login', methods=['GET', 'POST'])
+@home_bp.route('/v1/login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         msg = None
