@@ -94,7 +94,8 @@
                         {% if "name" in session %}
                         <li>
                             <a class="curlink dropdown-toggle" data-toggle="dropdown" href="javascript:;"
-                               style="font-weight: bold;;"></span>&nbsp;{{session["name"]}}<span class="caret"></span></a>
+                               style="font-weight: bold;;"></span>&nbsp;{{session["name"]}}<span
+                                    class="caret"></span></a>
                             <ul class="dropdown-menu" style="">
                                 <li><a class="" href="/v1/user_center/" style="font-weight: bold"><span
                                         class=""></span>&nbsp;会员中心</a></li>
@@ -219,7 +220,12 @@
                                    maxlength="20">
                             <div style="color: #dd1144;font-weight: bold" id="login_pwd_error"></div>
                         </div>
-                        <div style="color: red;font-weight: bold" id="login_error"></div>
+                        <div>
+                            <span style="color: green;font-weight: bold" id="login_error"></span>
+                            <img id="login-img" width="15px"
+                                 src="{{url_for('static',filename='home/images/loading.gif')}}"
+                                 alt="" hidden>
+                        </div>
                         <div class="col-md-12" style="padding: 0;margin-top: 8px">
                             <div class="form-group">
                                 没有账号，请先<a href="javascript:">注册</a>！忘记用户名或密码，<a href="javascript:">找回用户名</a>，<a

@@ -17,9 +17,10 @@ function user_login() {
         $('#login_pwd_error').text('密码格式不正确！');
         return;
     }
-    $('#login_error').text('登录中……');
+    $('#login_error').text('登录中 ');
+    $('#login-img').removeAttr('hidden');
     $.ajax({
-        url: '/v1/login',
+        url: '/v1/login/',
         type: 'post',
         data: {
             'name': name,
