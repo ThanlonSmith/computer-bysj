@@ -179,7 +179,7 @@ function user_register() {
     }
 
     $.ajax({
-        url: '/v1/register',
+        url: '/v1/register/',
         type: 'post',
         data: {
             'name': name,

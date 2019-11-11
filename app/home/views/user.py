@@ -32,7 +32,7 @@ def send_code():
     return msg
 
 
-@home_bp.route('/v1/register', methods=['GET', 'POST'])
+@home_bp.route('/v1/register/', methods=['POST'])
 def register():
     if request.method == 'POST':
         msg = None
@@ -64,9 +64,10 @@ def register():
             return msg
         msg = 'ok'
         return msg
+    return '不允许Get请求！'
 
 
-@home_bp.route('/v1/login/', methods=['GET', 'POST'])
+@home_bp.route('/v1/login/', methods=['POST'])
 def login():
     if request.method == 'POST':
         msg = None
@@ -96,6 +97,7 @@ def login():
         else:
             msg = 'error'
             return msg
+    return '不允许Get请求！'
 
 
 @home_bp.route('/v1/logout/')
