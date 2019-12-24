@@ -81,7 +81,7 @@
 
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        {% if "user" not in session %}
+                        {% if "name" not in session %}
                         <li>
                             <a data-toggle="modal" data-target="#loginModal" href=""
                                style="font-weight: bold;">&nbsp;登录</a>
@@ -91,20 +91,23 @@
                                style="font-weight: bold;">&nbsp;注册</a>
                         </li>
                         {% endif %}
-                        {% if "user" in session %}
+                        {% if "name" in session %}
                         <li>
-                            <a class="curlink" href="" style="font-weight: bold"><span
-                                    class=""></span>&nbsp;退出</a>
-                        </li>
-                        <li>
-                            <a class="curlink" href="" style="font-weight: bold"><span
-                                    class=""></span>&nbsp;{{session["user"]}}</a>
+                            <a class="curlink dropdown-toggle" data-toggle="dropdown" href="javascript:;"
+                               style="font-weight: bold;;"></span>&nbsp;{{session["name"]}}<span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu" style="">
+                                <li><a class="" href="/v1/user_center/" style="font-weight: bold"><span
+                                        class=""></span>&nbsp;会员中心</a></li>
+                                <li><a class="" href="/v1/logout/" style="font-weight: bold"></span><span
+                                        class=""></span>&nbsp;退出登录</a></li>
+                            </ul>
                         </li>
                         {% else %}
-                        <!--                                                <li>-->
-                        <!--                                                    <a class="curlink" href="" style="font-weight: bold"><span-->
-                        <!--                                                            class="glyphicon glyphicon-user"></span>&nbsp;会员中心</a>-->
-                        <!--                                                </li>-->
+                        <!--                        <li>-->
+                        <!--                            <a class="curlink" href="" style="font-weight: bold"><span-->
+                        <!--                                    class="glyphicon glyphicon-user"></span>&nbsp;会员中心</a>-->
+                        <!--                        </li>-->
                         {% endif %}
                     </ul>
                 </div>
@@ -129,14 +132,14 @@
                 <form>
                     <fieldset>
                         <div class="form-group">
-                            <label for=""><span
+                            <label for="name"><span
                                     class="glyphicon glyphicon-user"></span>&nbsp;账号</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="请输入用户名"
-                                   maxlength="15" autofocus="autofocus">
+                                   maxlength="12" autofocus="autofocus">
                             <div style="color: #dd1144;font-weight: bold" id="name_error"></div>
                         </div>
                         <div class="form-group">
-                            <label for=""><span
+                            <label for="mobile_number"><span
                                     class="glyphicon glyphicon-user"></span>&nbsp;手机号</label>
                             <input type="text" class="form-control" id="mobile_number" name="mobile_number"
                                    placeholder="请输入手机号"
@@ -144,14 +147,14 @@
                             <div style="color: #dd1144;font-weight: bold;" id="mobile_number_error"></div>
                         </div>
                         <div class="form-group">
-                            <label for=""><span
+                            <label for="pwd"><span
                                     class="glyphicon glyphicon-lock"></span>密码</label>
                             <input type="password" id="pwd" name="pwd" class="form-control" placeholder="请输入密码"
                                    maxlength="20" minlength="6">
                             <div style="color: #dd1144;font-weight: bold" id="pwd_error"></div>
                         </div>
                         <div class="form-group">
-                            <label for=""><span
+                            <label for="sure_pwd"><span
                                     class="glyphicon glyphicon-lock"></span>确认密码</label>
                             <input type="password" id="sure_pwd" name="sure_pwd" class="form-control"
                                    placeholder="再次输入密码"
@@ -159,12 +162,12 @@
                             <div style="color: #dd1144;font-weight: bold" id="sure_pwd_error"></div>
                         </div>
                         <div class="form-group">
-                            <label for="vertification_code"><span
+                            <label for="verify_code"><span
                                     class="glyphicon glyphicon-lock"></span>&nbsp;手机验证码</label>
                             <div class="input-group">
-                                <input type="text" id="vertification_code" name="vertification_code"
-                                       class="form-control" placeholder="输入4位手机验证码"
-                                       maxlength="4" minlength="4">
+                                <input type="text" id="verify_code" name="verify_code"
+                                       class="form-control" placeholder="输入6位手机验证码"
+                                       maxlength="6" minlength="6">
                                 <span class="input-group-addon">
 										<input type="button" value="获取手机验证码"
                                                onclick="send_verification_code(this)" style="border:none">
@@ -173,6 +176,8 @@
                             <div style="color: #dd1144;font-weight: bold" id="code_error"></div>
                             <div class="col-md-12" style="padding: 0;margin-top: 8px">
                                 <div class="form-group">
+                                    <div style="color: green;font-weight: bold" id="reg_success"></div>
+                                    <div style="color: red;font-weight: bold" id="reg_error"></div>
                                     已有账号，请直接<a href="javascript:">登录</a>!&nbsp;注册前请您详细阅读本站《<a
                                         href="javascript:">用户协议</a>》,如注册,则默认您同意本协议!
                                 </div>
@@ -202,23 +207,32 @@
                 <form>
                     <fieldset>
                         <div class="form-group">
-                            <label for=""><span
-                                    class="glyphicon glyphicon-user"></span>&nbsp;用户名</label>
-                            <input type="text" class="form-control" id="" placeholder=""
-                                   maxlength="4" minlength="4" autofocus="autofocus">
+                            <label for="login_name"><span
+                                    class="glyphicon glyphicon-user"></span>&nbsp;账号</label>
+                            <input type="text" class="form-control" id="login_name" placeholder="请输入账号或手机号"
+                                   maxlength="12" autofocus="autofocus">
+                            <div style="color: #dd1144;font-weight: bold" id="login_name_error"></div>
                         </div>
                         <div class="form-group">
-                            <label for=""><span
+                            <label for="login_pwd"><span
                                     class="glyphicon glyphicon-lock"></span>密码</label>
-                            <input type="text" class="form-control" placeholder=""
-                                   maxlength="4" minlength="4">
+                            <input type="password" class="form-control" id="login_pwd" placeholder="请输入密码"
+                                   maxlength="20">
+                            <div style="color: #dd1144;font-weight: bold" id="login_pwd_error"></div>
                         </div>
-                        <div class="col-md-12">
+                        <div>
+                            <span style="color: green;font-weight: bold" id="login_error"></span>
+                            <img id="login-img" width="15px"
+                                 src="{{url_for('static',filename='home/images/loading.gif')}}"
+                                 alt="" hidden>
+                        </div>
+                        <div class="col-md-12" style="padding: 0;margin-top: 8px">
                             <div class="form-group">
-                                没有账号，请先<a href="javascript:">注册</a>！登录出错，<a href="javascript:">找回用户名</a>，<a
+                                没有账号，请先<a href="javascript:">注册</a>！忘记用户名或密码，<a href="javascript:">找回用户名</a>，<a
                                     href="javascript:">找回密码</a>！
                             </div>
-                            <input type="submit" class="btn btn-log btn-primary btn-block" value="登录"
+                            <input type="button" class="btn btn-log btn-primary btn-block" value="登录"
+                                   onclick="user_login()"
                                    style="background-color: #0e91e8">
                         </div>
                     </fieldset>
@@ -298,76 +312,15 @@
 <script src="https://cdn.bootcss.com/holder/2.9.6/holder.min.js"></script>
 <script src="{{url_for('static',filename='home/js/go_top.js')}}"></script>
 <script src="{{url_for('static',filename='home/js/register.js')}}"></script>
+<script src="{{url_for('static',filename='home/js/login.js')}}"></script>
+
 <script>
     $(document).ready(function () {
         // 初始化animate动画组件
         new WOW().init();
         // 设置背景颜色
         $('body').css('background-color', '#f3f4f7');
-        // 表单控件的验证
-        $('#name').bind('input', function () {
-            // 获取name的值并赋值给变量
-            var name_value_length = $('#name').val().length;
-            // 判断值的长度，如果小于6位，则提示“不能少于6位”，否则无错误提示
-            if (0 < name_value_length < 6) {
-                $('#name_error').text('不能少于6位');
-            }
-            if (name_value_length >= 6 || name_value_length === 0) {
-                $('#name_error').text('');
-            }
-        });
-        $('#mobile_number').bind('input', function () {
-            var mobile_number_length = $('#mobile_number').val().length;
-            if (mobile_number_length < 11) {
-                $('#mobile_number_error').text('手机号不能少于11位');
-            }
-            if (mobile_number_length === 11 || mobile_number_length === 0) {
-                $('#mobile_number_error').text('');
-            }
-        })
-
     });
-
-    function send_verification_code(ths) {
-        //获取手机号
-        var mobile_number = $('#mobile_number').val();
-        // alert(mobile_number);
-        // 定义手机号的正则
-        var pattern = /^1[345789]\d{9}$/;
-        // 判断是否输入手机号以及格式格式是否正确
-        if (mobile_number === "" || mobile_number == null || !pattern.test(mobile_number)) {
-            alert("手机号格式错误!");
-        } else {
-            // 如果输入手机号先让发送按钮不可用
-            // ths.setAttribute("disabled", "disabled");
-            // 设置倒计时时间
-            var count = 60;
-            // 设置定时器控制用户发送请求验证码的时间间隔
-            var timer = setInterval(function () {
-                ths.value = count + "s";
-                count--;
-                if (count < 0) {
-                    ths.removeAttribute("disabled");
-                    clearInterval(timer);
-                    ths.value = "获取手机验证码";
-                }
-            }, 1000);
-        }
-    }
-
-    function user_register() {
-        var name = $('#name').val();
-        var mobile_number = $('#mobile_number').val();
-        var pwd = $('#pwd').val();
-        var sure_pwd = $('#sure_pwd').val();
-        var vertification_code = $('#vertification_code').val();
-        console.log(name);
-        console.log(mobile_number);
-        console.log(pwd);
-        console.log(sure_pwd);
-        console.log(vertification_code);
-
-    }
 </script>
 {% block js %}
 {% endblock %}

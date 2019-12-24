@@ -26,9 +26,9 @@ class ProductionConfig(Config):
         setsession=[],
         ping=0,
         host='106.12.115.136',
-        port=3307,
+        port=60001,
         user='thanlon',
-        password='39kiku',
+        password='MysqlMaster520!',
         database='39bysj',
         charset='utf8'
     )
@@ -47,12 +47,14 @@ class DevelopmentConfig(Config):
         setsession=[],
         ping=0,
         host='106.12.115.136',
-        port=3307,
+        port=60001,
         user='thanlon',
-        password='39kiku',
+        password='MysqlMaster520!',
         database='39bysj',
         charset='utf8'
     )
+    SECRET_KEY = '0160a068dba74c5aa21f5b93cc6b95c5'
+    SALT = b'thanlon'
 
 
 class TestingConfig(Config):
