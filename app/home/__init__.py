@@ -8,4 +8,4 @@
 from flask import Blueprint
 
 home_bp = Blueprint('home', __name__)
-from .views import user,index,robots,feedback,mall,about_website
+from .views import user,index,robots,feedback,mall,about_website,disclaimer,blueprint,contact_us

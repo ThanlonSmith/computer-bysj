@@ -7,6 +7,6 @@
 # @Software: PyCharm
 from .. import home_bp
 from flask import render_template
-@home_bp.route('/v1/about-website')
-def about_website():
-    return render_template('/home/about_website.html')
+@home_bp.route('/v1/disclaimer')
+def disclaimer():
+    return render_template('/home/disclaimer.html')
