@@ -5,9 +5,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="39毕业设计网是一个集“计算机专业大学生毕业设计的指导、网站的建设、计算机技术的学习和互联网资讯的发布等”于一体的综合网站平台。">
-    <meta name="keywords" content="39毕设网，毕业设计，源代码，论文，计算机语言，IT教程，IT咨询">
-    <title>39毕设网</title>
+    <meta name="description" content="计算机毕设网是一个集“计算机专业大学生毕业设计的指导、网站的建设、计算机技术的学习和互联网资讯的发布等”于一体的综合网站平台。">
+    <meta name="keywords" content="计算机毕设网，毕业设计，源代码，论文，计算机语言，IT教程，IT咨询">
+    <title>计算机毕设网</title>
     <link rel="icon" href="" type="image/x-icon">
     <link rel="shortcut icon" href="" type="image/x-icon">
     <link rel="stylesheet" href="{{url_for('static',filename='public/bootstrap/css/bootstrap.min.css')}}">
@@ -32,8 +32,8 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a href="" class="navbar-brand"
-                       style="width:130px;color: #333;height: 60px;padding-top: 18px;">
-                        <span class="glyphicon glyphicon-flag" style="color:#3379b7 "></span>39毕设网
+                       style="width:170px;color: #333;height: 60px;padding-top: 18px;">
+                        <span class="glyphicon glyphicon-flag" style="color:#3379b7 "></span>计算机毕设网
                     </a>
                 </div>
                 <!--小屏幕导航按钮和logo-->
@@ -261,9 +261,9 @@
     <div class="row">
         <div class="col-md-12  text-center" style="padding: 40px">
             <a href="{{url_for('home.about_website')}}" style="color:#c1c1c1;font-weight: bold">关于本站</a>&nbsp;|&nbsp;<a
-                href="" style="color:#c1c1c1;font-weight: bold">免责申明</a>&nbsp;|&nbsp;<a
-                href="" style="color:#c1c1c1;font-weight: bold">本站蓝图</a>&nbsp;|&nbsp;<a
-                href="" style="color:#c1c1c1;font-weight: bold">联系我们</a>
+                href="{{url_for('home.disclaimer')}}" style="color:#c1c1c1;font-weight: bold">免责申明</a>&nbsp;|&nbsp;<a
+                href="{{url_for('home.blueprint')}}" style="color:#c1c1c1;font-weight: bold">本站蓝图</a>&nbsp;|&nbsp;<a
+                href="{{url_for('home.contact_us')}}" style="color:#c1c1c1;font-weight: bold">联系我们</a>
             <br>
             Copyright © 2019-2020&nbsp; 39bysj. All Rights Reserved.&nbsp;39毕设网 版权所有&nbsp;
             <br>
